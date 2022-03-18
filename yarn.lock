@@ -1291,7 +1291,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:>=12.12.47, @types/node@npm:>=13.7.0":
+"@types/node@npm:*, @types/node@npm:>=12.12.47, @types/node@npm:>=13.7.0":
   version: 17.0.21
   resolution: "@types/node@npm:17.0.21"
   checksum: 89dcd2fe82f21d3634266f8384e9c865cf8af49685639fbdbd799bdd1040480fb1e8eeda2d3b9fce41edbe704d2a4be9f427118c4ae872e8d9bb7cbeb3c41a94
@@ -1532,6 +1532,15 @@ __metadata:
   version: 1.0.30001316
   resolution: "caniuse-lite@npm:1.0.30001316"
   checksum: 8a96ee89f5e64f42f684475905c73c67f995abd6d9b111ab8a9d2e0a5d3b871f1a600ff42e4ffe7f7f3498d0243beeafc11cf7b4dbe3e022a2e5cdf639564152
+  languageName: node
+  linkType: hard
+
+"canvas-renderer@npm:~2.2.0":
+  version: 2.2.0
+  resolution: "canvas-renderer@npm:2.2.0"
+  dependencies:
+    "@types/node": "*"
+  checksum: 348bbfed8530c2df557e1820814a17a1d950d004e34bf307ecc8ea6ca94f8706ddaf02d81fb67480f64da7a92f2811964cb41791f4bd00edfcc8498472b096a7
   languageName: node
   linkType: hard
 
@@ -2345,6 +2354,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jdenticon@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "jdenticon@npm:3.1.1"
+  dependencies:
+    canvas-renderer: ~2.2.0
+  bin:
+    jdenticon: bin/jdenticon.js
+  checksum: 1c0c64a5740a70a8b9a11db53252c092e07543a122570132c0b824f3344c50ee705b0aada03cbeaeaab9e297c8aea5354a018e21a2780e7b9d7250d9d03ae2e8
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -2425,6 +2445,7 @@ __metadata:
     "@types/react-dom": ^17.0.10
     "@vitejs/plugin-react": ^1.0.7
     firebase: ^9.6.8
+    jdenticon: ^3.1.1
     react: ^17.0.2
     react-dom: ^17.0.2
     typescript: ^4.5.4

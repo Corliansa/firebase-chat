@@ -21,9 +21,11 @@ const auth = getAuth(app);
 
 const userStore = create((set: any) => ({
 	user: null,
+	loading: true,
 	login: (email: string, password: string) =>
 		signInWithEmailAndPassword(auth, email, password),
 	logout: () => auth.signOut(),
+
 	register: (email: string, password: string) =>
 		createUserWithEmailAndPassword(auth, email, password),
 }));
@@ -34,6 +36,7 @@ auth.onAuthStateChanged(async (user: any) => {
 	} else {
 		userStore.setState({ user: null });
 	}
+	userStore.setState({ loading: false });
 });
 
 export default userStore;
