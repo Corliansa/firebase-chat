@@ -14,19 +14,25 @@ import Message from "./Message";
 import { useEffect, useRef, useState } from "react";
 
 function App() {
-	const [user, logout]: any = userStore((state) => [state.user, state.logout]);
+	const [user, logout, loading]: any = userStore((state) => [
+		state.user,
+		state.logout,
+		state.loading,
+	]);
+	const setLoading: any = userStore((state) => state.setLoading);
+
 	const db = getFirestore();
 	const [chats, setChats] = useState([]);
 	const end: any = useRef(null);
 
 	useEffect(() => {
 		const unsubscribe: any = [];
+		const q = query(
+			collection(db, "chats"),
+			orderBy("date", "desc"),
+			limit(25)
+		);
 		if (user) {
-			const q = query(
-				collection(db, "chats"),
-				orderBy("date", "desc"),
-				limit(25)
-			);
 			unsubscribe.push(
 				onSnapshot(q, (snapshot) => {
 					const chats: any = snapshot.docs.map((doc) => ({
@@ -78,7 +84,15 @@ function App() {
 				}}
 			>
 				<h2>Welcome, {user?.email}</h2>
-				<Button disabled={!user} onClick={() => logout()}>
+				<Button
+					disabled={!user}
+					onClick={() => {
+						setLoading(1);
+						setTimeout(() => {
+							logout().then(() => setLoading(0));
+						}, 500);
+					}}
+				>
 					Logout
 				</Button>
 			</div>

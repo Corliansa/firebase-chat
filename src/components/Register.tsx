@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 
 function App() {
 	const register: any = userStore((state) => state.register);
+	const setLoading: any = userStore((state) => state.setLoading);
 
 	const [error, setError] = useState("");
 	const userRef = useRef<HTMLInputElement>(null);
@@ -12,6 +13,7 @@ function App() {
 
 	const signUp = () => {
 		setError("");
+		setLoading(1);
 		if (passRef.current?.value !== confRef.current?.value) {
 			setError("Passwords do not match");
 			return;
@@ -21,9 +23,9 @@ function App() {
 			passRef.current?.value &&
 			confRef.current?.value
 		) {
-			register(userRef.current?.value, passRef.current?.value).catch(
-				(error: any) => setError(error?.code)
-			);
+			register(userRef.current?.value, passRef.current?.value)
+				.catch((error: any) => setError(error?.code))
+				.then(() => setLoading(0));
 		} else {
 			setError("Please fill out all fields");
 		}

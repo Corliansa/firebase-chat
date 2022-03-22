@@ -25,9 +25,10 @@ const userStore = create((set: any) => ({
 	login: (email: string, password: string) =>
 		signInWithEmailAndPassword(auth, email, password),
 	logout: () => auth.signOut(),
-
 	register: (email: string, password: string) =>
 		createUserWithEmailAndPassword(auth, email, password),
+	setLoading: (load: number) =>
+		set((state: any) => ({ loading: load === -1 ? !state.loading : load })),
 }));
 
 auth.onAuthStateChanged(async (user: any) => {

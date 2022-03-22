@@ -5,6 +5,7 @@ import Register from "./Register";
 
 function App() {
 	const login: any = userStore((state) => state.login);
+	const setLoading: any = userStore((state) => state.setLoading);
 
 	const [error, setError] = useState("");
 	const userRef = useRef<HTMLInputElement>(null);
@@ -14,10 +15,11 @@ function App() {
 
 	const logIn = () => {
 		setError("");
+		setLoading(1);
 		if (userRef.current?.value && passRef.current?.value) {
-			login(userRef.current?.value, passRef.current?.value).catch(
-				(error: any) => setError(error?.code)
-			);
+			login(userRef.current?.value, passRef.current?.value)
+				.catch((error: any) => setError(error?.code))
+				.then(() => setLoading(0));
 		} else {
 			setError("Please fill out all fields");
 		}

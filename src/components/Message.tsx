@@ -18,13 +18,14 @@ function App({ data }: any) {
 			month: "short",
 			day: "numeric",
 		});
+	const isCurrentUser = user?.uid === data?.uid;
 	return (
 		<div
 			style={{
 				display: "flex",
 				alignItems: "center",
-				alignSelf: user?.uid === data?.uid ? "flex-end" : "flex-start",
-				flexDirection: user?.uid === data?.uid ? "row-reverse" : "row",
+				alignSelf: isCurrentUser ? "flex-end" : "flex-start",
+				flexDirection: isCurrentUser ? "row-reverse" : "row",
 			}}
 		>
 			<div
@@ -43,15 +44,25 @@ function App({ data }: any) {
 			/>
 			<div
 				style={{
-					backgroundColor: user?.uid === data?.uid ? "#333" : "#333",
+					backgroundColor: isCurrentUser ? "#333" : "#333",
 					padding: 8,
 					borderRadius: 6,
 					margin: 4,
 					display: "flex",
+					flexDirection: "column",
 				}}
 			>
-				<p>{data.text}</p>
-				<p style={{ fontSize: 12, alignSelf: "flex-end", paddingLeft: 6 }}>
+				<p style={{ textAlign: isCurrentUser ? "right" : "left" }}>
+					{data.text}
+				</p>
+				<p
+					style={{
+						fontSize: 10,
+						textAlign: isCurrentUser ? "right" : "left",
+						paddingLeft: 6,
+						color: "#aaa",
+					}}
+				>
 					{isYesterday && "Yesterday"}{" "}
 					{data?.date?.seconds ? date.toLocaleString("en-UK", options) : ""}
 				</p>
